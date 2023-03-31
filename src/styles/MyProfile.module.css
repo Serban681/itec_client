@@ -1,0 +1,8 @@
+.edit_container {
+    width: 100%;
+}
+
+.edit_container > label {
+    display: block;
+    margin-right: 1rem;
+}
