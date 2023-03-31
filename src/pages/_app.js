@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import '@/styles/globals.css'
-import Navbar from './components/Navbar'
+import Navbar from '../components/Navbar'
 import { useState, createContext } from "react"
 
 export const UserContext = createContext()

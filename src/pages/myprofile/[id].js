@@ -1,21 +1,35 @@
 import DatePicker from "react-datepicker"
-import { useForm } from "./utils/useForm";
+import { useForm } from "../../utils/useForm";
 
 import styles from "@/styles/MyProfile.module.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "react-datepicker/dist/react-datepicker.css"
 
-export default function MyProfile({ user }) {
+import { UserContext } from "../_app";
+import { useContext } from "react";
+
+import { useRouter } from "next/router";
+
+export default function MyProfile({  }) {
     const [startDate, setStartDate] = useState(new Date())
 
     const {formData, handleInputChange} = useForm({name: '', email: '', position: ''})
     
+    const { user } = useContext(UserContext)
+
+    const router = useRouter()
+    const { id } = router.query
+
     const saveEdit = (e) => {
         e.preventDefault()
         console.log(startDate)
         console.log(formData)
+    }
+
+    const handleClick = () => {
+        console.log(id)
     }
 
     return (
@@ -26,7 +40,7 @@ export default function MyProfile({ user }) {
                 <label >
                     Name
                     <br />
-                    <input name="name" value={formData.name} type="text" onChange={handleInputChange} />
+                    <input readOnly={!(user.role === 'manager')} name="name" value={formData.name} type="text" onChange={handleInputChange} />
                 </label>
                 <label>
                     Email
@@ -43,8 +57,10 @@ export default function MyProfile({ user }) {
                     <br />
                     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                 </label>
-                <button disabled={true} type="submit" onClick={saveEdit}>Save</button>
+                {user.role === 'manager' &&  <button type="submit" onClick={saveEdit}>Save</button>}
             </form>
+
+            <button onClick={() => handleClick()}>Click me</button>
         </div>
     )
 }
