@@ -1,8 +1,12 @@
 .container {
     display: flex;
+    padding: 1rem;
     justify-content: space-between;
+    background-color: var(--red);
 }
 
-.button {
-    margin-right: 1rem;
+.btn {
+    margin-left: 1rem;
 }
+
+

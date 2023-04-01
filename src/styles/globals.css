@@ -1,5 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+
+:root {
+    --red: #B46060;
+    --black: #4D4D4D;
+    --yellow:  #FFDBC7;
+    --gray: #8D8181;
+}
+
 .hide {
     display: none;
+}
+
+body {
+    margin: 0;
+}
+
+.logo {
+    border-radius: 5rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--yellow);
 }
 
 textarea {
@@ -8,5 +28,30 @@ textarea {
 
 button {
     cursor: pointer;
-    /* background-color: ; */
+    padding: 0.7rem 2rem;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--black);
+    border: none;
+    border-radius: 0.25rem;
+    color: white;
+} 
+
+input {
+    padding: 0.5rem;
+    border: 1px solid var(--black);
+    border-radius: 0.25rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    border: none;
+    color: var(--black);
 }
+
+label > input {
+    margin-top: 0.2rem;
+}
+
+input:focus {
+    outline: none;
+}
+
