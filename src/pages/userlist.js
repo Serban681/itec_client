@@ -12,15 +12,31 @@ export default function Manager() {
     const { user } = useContext(UserContext)
 
     useEffect(() => {
-        console.log(user)
+        if(user.role === 'manager') {
+            fetch('http://localhost:5140/api/oldemployees')
+                .then(res => res.json())
+                .then(data => console.log(data))
+                // .then(data => setUsers([...users, data]))
+
+            fetch('http://localhost:5140/api/newemployees') // is all or just for the buddyyy?
+                .then(res => res.json())
+                .then(data => console.log(data))
+                // .then(data => setUsers([...users, data]))
+        }
+        else {
+            fetch('http://localhost:5140/api/newemployees') // is all or just for the buddyyy?
+                .then(res => res.json())
+                .then(data => console.log(data))
+                // .then(data => setUsers([...users, data]))
+        }
     })
 
     return (
         <div>
             <h1>Manager</h1>
 
-            <UserItem user={{name: 'Ser', email: 'ser@gmail.com', position: 'sw eng'}} />
-            {/* {users.map((user) => <UserItem user={user} />)} */}
+            {/* <UserItem user={{name: 'Ser', email: 'ser@gmail.com', position: 'sw eng'}} /> */}
+            {users.map((user) => <UserItem user={user} />)}
         </div>
     )
 }

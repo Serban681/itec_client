@@ -12,7 +12,8 @@ export default function UserItem({ user }) {
     }
 
     const goToEdit = () => {
-        router.push(`/myprofile/${28913}`)
+        // router.push(`/myprofile/${user.id}`)
+        router.push(`/myprofile/${21312}`)
     }
 
     

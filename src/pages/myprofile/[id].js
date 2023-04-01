@@ -3,7 +3,7 @@ import { useForm } from "../../utils/useForm";
 
 import styles from "@/styles/MyProfile.module.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -25,6 +25,20 @@ export default function MyProfile({  }) {
     const { id } = router.query
 
     const { totalDays, calculateTotalDays } = useDaysWoked()
+
+    useEffect(() => {
+        // const token = sessionStorage.getItem('token')
+        // console.log(token)
+
+        // if(user.role === 'manager' || token === null) {
+        //     router.push(`/userlist`)
+        // }
+
+        // fetch(`http://localhost:5140/${user.role === 'new_employee' ? 'newemployees' : 'oldemployess'}/${id}`)
+        //     .then(res => res.json())
+        //     .then(data => console.log(data))
+            // .then(data => setFormData(data))
+    }, [])
 
     const handleDateChange = (date) => {
         setStartDate(date)

@@ -1,34 +1,43 @@
 import { useForm } from "@/utils/useForm"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { UserContext } from "./_app"
 
 export default function createUser() {
     const {formData, handleInputChange} = useForm({email: '', password: '', role: 'manager'})
 
     const router = useRouter()
 
-    const [roles, setRoles] = useState([{}])
+    const { roles, setRoles } = useContext(UserContext)
 
-    useEffect(() => {
-        fetch('http://localhost:5140/api/roles')
-            .then(async res => console.log(await res.json()))
-            // .then(data => console.log(data))
-            // .then(data => console.log(data))
-            // .then(data => setRoles(data))
+    useEffect(() => {        
+        // .then(data => console.log(data))
+        // .then(data => setRoles(data))
     }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        // console.log(roles[formData.role])
         fetch('http://localhost:5140/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify({
+                email: formData.email,
+                password: formData.password,
+                roleId: roles[formData.role]
+            })
         })
-        .then(res => res.json())
-        .then(data => console.log(data))
+        .then(res => {
+            console.log(res)
+        })
+        .then(data => {
+            
+        })
+        .catch(err => console.log(err))
+        
         // if(formData.role === 'manager') {
         //     router.push('/userlist')
         // } else {
@@ -53,8 +62,8 @@ export default function createUser() {
                 Role
                 <select name="role" id="role" value={formData.role} onChange={handleInputChange}>
                     <option value="manager">Manager</option>
-                    <option value="old_employee">Old Employee</option>
-                    <option value="new_employee">New Employee</option>
+                    <option value="oldemployee">Old Employee</option>
+                    <option value="newemployee">New Employee</option>
                 </select>
             </label>
             <br /><br />
