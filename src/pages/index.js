@@ -2,10 +2,11 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import Navbar from '../components/Navbar'
 import { useForm } from '../utils/useForm'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
+import { useContext, useEffect } from 'react'
+import { UserContext } from './_app'
 
 // import styles from '@/styles/Index.module.css'
 
@@ -13,10 +14,24 @@ import { toast } from 'react-toastify'
 
 export default function Home() {
   const {formData, handleInputChange} = useForm({email: 'admin@example.com', password: 'parola123'})
+  const {setRoles} = useContext(UserContext)
 
   const error = () => toast.error("Internal Server Error!")
 
   const router = useRouter()
+
+  useEffect(() => {
+    fetch('http://localhost:5140/api/roles')
+      .then(res => res.json())
+      .then(data => {
+          let dict = {}
+          data.forEach(element => {
+              dict[element.name] = element.id
+          })
+          
+          setRoles(dict)
+      })
+  }, [])
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault()

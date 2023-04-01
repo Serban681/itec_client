@@ -10,8 +10,6 @@ export default function Middleware() {
     const { user, setUser } = useContext(UserContext)
 
     useEffect(() => {
-        fetch('http://localhost:5140/api/roles').then(res => res.json()).then(data => console.log(data))
-
         const token = sessionStorage.getItem('token')
         
         const decoded = jwt_decode(token)
@@ -23,10 +21,10 @@ export default function Middleware() {
         // console.log(user)
 
         if(token !== '') {
-            if (role === 'manager') {
+            if (role === 'manager' || role === 'old_employee') {
                 router.push('/userlist')
             } else {
-
+                // router.push(`/myprofile/${user.id}`)
             }
         } else {
             router.push('/')
@@ -34,8 +32,6 @@ export default function Middleware() {
     }, [])
 
     return (
-        <div>
-            <h1>Middleware</h1>
-        </div>
+        <></>
     )
 }
