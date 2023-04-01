@@ -83,7 +83,7 @@ export default function Home() {
             <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
           </label>
           <br />
-          <button className={styles.button} type="submit">Submit</button>
+          <button className={styles.button} type="submit">Log In</button>
         </form>
       </main>
     </>

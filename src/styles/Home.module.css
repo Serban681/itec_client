@@ -36,20 +36,13 @@
     transform: translateX(-50%);
     top: 20%;
 
-    background: #FFF4E0;
+    background: var(--white);
     border-radius: 20px;
 }
 .button{
     position: absolute;
-    width: 15%;
-    max-width: 279px;
     height: 12%;
     left: 80%;
     transform: translateX(-50%);
     bottom: 10%;
-    border-style: none;
-    background: #4D4D4D;
-    border-radius: 5px;
-    font-family: 'Montserrat';
-    color: var(--white);
 }
