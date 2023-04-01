@@ -8,6 +8,8 @@ export const UserContext = createContext()
 export default function App({ Component, pageProps }) {
   const [user, setUser] = useState({
     jwt: '',
+    id: 2,
+    // role: 'manager'
   })
 
   return (

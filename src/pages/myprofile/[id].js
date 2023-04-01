@@ -3,7 +3,7 @@ import { useForm } from "../../utils/useForm";
 
 import styles from "@/styles/MyProfile.module.css";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -11,6 +11,8 @@ import { UserContext } from "../_app";
 import { useContext } from "react";
 
 import { useRouter } from "next/router";
+
+import { useDaysWoked } from "../../utils/useDaysWorked";
 
 export default function MyProfile({  }) {
     const [startDate, setStartDate] = useState(new Date())
@@ -22,6 +24,13 @@ export default function MyProfile({  }) {
     const router = useRouter()
     const { id } = router.query
 
+    const { totalDays, calculateTotalDays } = useDaysWoked()
+
+    const handleDateChange = (date) => {
+        setStartDate(date)
+        calculateTotalDays(date)
+    }
+
     const saveEdit = (e) => {
         e.preventDefault()
         console.log(startDate)
@@ -29,7 +38,7 @@ export default function MyProfile({  }) {
     }
 
     const handleClick = () => {
-        console.log(id)
+        console.log(user.id)
     }
 
     return (
@@ -40,7 +49,7 @@ export default function MyProfile({  }) {
                 <label >
                     Name
                     <br />
-                    <input readOnly={!(user.role === 'manager')} name="name" value={formData.name} type="text" onChange={handleInputChange} />
+                    <input name="name" value={formData.name} type="text" onChange={handleInputChange} />
                 </label>
                 <label>
                     Email
@@ -50,17 +59,25 @@ export default function MyProfile({  }) {
                 <label>
                     Position
                     <br />
-                    <input name="position" value={formData.position} type="text" onChange={handleInputChange} />
+                    <input readOnly={!(user.role === 'manager')} name="position" value={formData.position} type="text" onChange={handleInputChange} />
                 </label>
                 <label>
-                    Date
+                    Start Date
                     <br />
-                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+                    <DatePicker readOnly={!(user.role === 'manager')} selected={startDate} onChange={(date) => handleDateChange(date)} />
                 </label>
-                {user.role === 'manager' &&  <button type="submit" onClick={saveEdit}>Save</button>}
+                <p>Days Worked: {totalDays}</p>
+
+                <label htmlFor="bio">
+                    Bio
+                    <br />
+                    <textarea name="bio" id="bio" value={formData.bio} onChange={handleInputChange}></textarea>
+                </label>
+                {/* {user.id === id &&  <button type="submit" onClick={saveEdit}>Save</button>} */}
+                <button disabled={!(user.id == id || user?.role === 'manager')} type="submit" onClick={saveEdit}>Save</button>
             </form>
 
-            <button onClick={() => handleClick()}>Click me</button>
+            {/* <button onClick={() => handleClick()}>Click me</button> */}
         </div>
     )
 }

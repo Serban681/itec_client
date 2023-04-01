@@ -21,7 +21,7 @@ export default function UserItem({ user }) {
     return (
         <div className={styles.main_container}>
             <div className={styles.info_container}>
-                <div>Profile Image</div>
+                {/* <div>Profile Image</div> */}
                 <div>{user.name}</div>
                 <div>{user.position}</div>
                 <div>{user.email}</div>
@@ -31,12 +31,13 @@ export default function UserItem({ user }) {
 
                 
             </div>
+
             <div className={`${!isBioHidden && 'hide'}`}>
-            <div className={` ${styles.bio_container}`}>
-                Hello I'm Sam. And I code everyday
-                <br />
-                <button onClick={() => goToEdit()}>Edit</button>
-            </div>
+                <div className={` ${styles.bio_container}`}>
+                    Hello I'm Sam. And I code everyday
+                    <br />
+                    <button onClick={() => goToEdit()}>Edit</button>
+                </div>
             </div>
         </div>
     )

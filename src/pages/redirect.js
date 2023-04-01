@@ -10,7 +10,7 @@ export default function Middleware() {
     useEffect(() => {
         console.log(user)
         if (user.jwt === '') {
-            alert("Hello! I am an alert box!!");
+            alert("You are not logged in");
             router.push('/')
         } else {
             setUser({ ...user, role: 'manager' })
