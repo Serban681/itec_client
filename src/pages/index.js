@@ -7,6 +7,8 @@ import { useForm } from '../utils/useForm'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 
+// import styles from '@/styles/Index.module.css'
+
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -69,17 +71,19 @@ export default function Home() {
 
   return (
     <>
-      <main className={styles.main}>
-        <form onSubmit={handleLoginSubmit}>
-          <label>Email
+      <main className={styles.container}>
+        <form className={styles.form} onSubmit={handleLoginSubmit}>
+          <label className={styles.label}>
+            <div>Email</div>
             <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
           </label>
           <br />
-          <label>Password
+          <label className={styles.label}>
+            <div>Password</div>
             <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
           </label>
           <br />
-          <button type="submit">Submit</button>
+          <button className={styles.button} type="submit">Submit</button>
         </form>
       </main>
     </>
