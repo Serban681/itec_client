@@ -4,13 +4,15 @@ import { useState } from "react"
 import { useContext } from "react"
 import { UserContext } from "./_app"
 
+import { useEffect } from "react"
+
 export default function Manager() {
     const [users, setUsers] = useState([])
 
     const { user } = useContext(UserContext)
 
     useEffect(() => {
-        
+        console.log(user)
     })
 
     return (

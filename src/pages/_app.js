@@ -2,14 +2,17 @@ import Head from 'next/head'
 import '@/styles/globals.css'
 import Navbar from '../components/Navbar'
 import { useState, createContext } from "react"
+import { ToastContainer } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export const UserContext = createContext()
 
 export default function App({ Component, pageProps }) {
   const [user, setUser] = useState({
-    jwt: '',
-    id: 2,
-    // role: 'manager'
+    role: '',
+    iat: '',
+    jti: ''
   })
 
   return (
@@ -21,6 +24,18 @@ export default function App({ Component, pageProps }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Navbar />
+        <ToastContainer 
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
         <Component {...pageProps} />
       </UserContext.Provider>
     )

@@ -1,19 +1,40 @@
 import { useForm } from "@/utils/useForm"
 import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
 
 export default function createUser() {
     const {formData, handleInputChange} = useForm({email: '', password: '', role: 'manager'})
 
     const router = useRouter()
 
+    const [roles, setRoles] = useState([{}])
+
+    useEffect(() => {
+        fetch('http://localhost:5140/api/roles')
+            .then(async res => console.log(await res.json()))
+            // .then(data => console.log(data))
+            // .then(data => console.log(data))
+            // .then(data => setRoles(data))
+    }, [])
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(formData.role === 'manager') {
-            router.push('/userlist')
-        } else {
-            router.push('/create-employee')
-        }
-        console.log(formData)
+
+        fetch('http://localhost:5140/api/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        // if(formData.role === 'manager') {
+        //     router.push('/userlist')
+        // } else {
+        //     router.push('/create-employee')
+        // }
+        // console.log(formData)
     }
 
     return (

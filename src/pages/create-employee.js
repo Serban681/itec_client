@@ -15,6 +15,17 @@ export default function CreateUser() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
+        fetch(`http://localhost:5000/api/${totalDays > 365 ? 'oldemployees' : 'newemployees'}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        }).then(res => res.json())
+        .then(data => console.log(data))
+
+
         console.log(formData)
         console.log(startDate)
     }
@@ -26,7 +37,7 @@ export default function CreateUser() {
 
     return (
         <div>
-            <h1>Create User</h1>
+            <h1>Create Employee</h1>
 
             <form onSubmit={handleSubmit} className={styles.container}>
                 <label htmlFor="name">

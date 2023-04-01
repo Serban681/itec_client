@@ -5,21 +5,66 @@ import styles from '@/styles/Home.module.css'
 import Navbar from '../components/Navbar'
 import { useForm } from '../utils/useForm'
 import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
 
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const {formData, handleInputChange} = useForm({email: '', password: ''})
+  const {formData, handleInputChange} = useForm({email: 'admin@example.com', password: 'parola123'})
+
+  const error = () => toast.error("Internal Server Error!")
 
   const router = useRouter()
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault()
-    console.log(formData)
 
-    // fetch data from api
+    const res = await fetch('http://localhost:5140/api/auth', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData)
+    }).then(res => res.json())
+    .then(data => {
+      console.log(data)
+      sessionStorage.setItem('token', data.token)
+      router.push('/redirect')
+    }).catch(err => {
+      toast.error("Invalid credentials!")
+    })
 
-    router.push('/redirect')
+    // console.log(await res.json())
+    // .then(async res => {
+    //   const data = await res.json()
+
+    //   if(!res.ok) {
+    //     const error = (data && data.message) || res.status
+    //     return Promise.reject(error)
+    //   }
+
+    //   console.log(data)
+
+    //   if(data.status === 200) {
+    //     router.push('/redirect')
+    //   } else if(data.status === 401) {
+    //     toast.error("Invalid credentials!")
+    //   } else {
+    //     toast.error("Internal server error!")
+    //   }
+    // })
+    // .then(data => {
+    //   console.log(data)
+
+    //   if(data.status === 200) {
+    //     router.push('/redirect')
+    //   } else if(data.status === 401) {
+    //     toast.error("Invalid credentials!")
+    //   } else {
+    //     toast.error("Internal server error!")
+    //   }
+    // })
+    // .catch(err => toast.error("Internal server error!"))
   }
 
   return (
