@@ -72,7 +72,11 @@ export default function Home() {
   return (
     <>
       <main className={styles.container}>
+        
         <form className={styles.form} onSubmit={handleLoginSubmit}>
+          <div className={styles.login_nav}>
+            <div className='logo'></div>
+          </div>
           <label className={styles.label}>
             <div>Email</div>
             <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
