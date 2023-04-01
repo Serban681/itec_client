@@ -3,7 +3,8 @@
 :root {
     --red: #B46060;
     --black: #4D4D4D;
-    --white:  #FFF4E0;
+    --yellow:  #FFDBC7;
+    --gray: #8D8181;
 }
 
 .hide {

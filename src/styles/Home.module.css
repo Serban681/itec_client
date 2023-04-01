@@ -36,7 +36,7 @@
     transform: translateX(-50%);
     top: 20%;
 
-    background: var(--white);
+    background: var(--yellow);
     border-radius: 20px;
 }
 .button{
