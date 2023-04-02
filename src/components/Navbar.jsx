@@ -36,7 +36,6 @@ export default function Navbar() {
                 {user.role === 'manager' && <button onClick={goToCreateUser} className={styles.btn}>Add user</button>}
                 {user.role !== 'manager' && <button onClick={goToMyProfile} className={styles.btn}>My Profile</button>}
                 {user.role === 'manager' && <button onClick={goToCreateQuestions} className={styles.btn}>Create Questions</button>}
-                {user.role !== 'manager' && <button onClick={goToMyProfile} className={styles.btn}>My Profile</button>}
                 {/* {user.role === 'manager' && <button onClick={goToQuestions} className={styles.btn}>Questions</button>} */}
             </div>
         </div>
