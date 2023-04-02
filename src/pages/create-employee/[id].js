@@ -1,33 +1,38 @@
-import styles from '../styles/CreateUser.module.css'
+import styles from '../../styles/CreateUser.module.css'
 import { useForm } from '@/utils/useForm'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { useState } from 'react'
 
 import { useDaysWoked } from '@/utils/useDaysWorked'
+import Router, {useRouter} from 'next/router'
 
 export default function CreateUser() {
-    const {formData, handleInputChange } = useForm({name: '', 'email': '', 'bio': '', 'position': ''})
+    const {formData, handleInputChange } = useForm({name: '', 'bio': '', 'position': ''})
 
     const [startDate, setStartDate] = useState(new Date())
 
     const { totalDays, calculateTotalDays } = useDaysWoked()
 
+    const { id } = Router.query
+
+    const router = useRouter()
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        fetch(`http://localhost:5000/api/${totalDays > 365 ? 'oldemployees' : 'newemployees'}`, {
+        fetch(`http://localhost:5140/api/${totalDays > 365 ? 'oldemployees' : 'newemployees'}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify({...formData, userId: id, startedWorking: startDate})
         }).then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => router.push(`/userlist`))	
 
 
-        console.log(formData)
-        console.log(startDate)
+        // console.log(formData)
+        // console.log(startDate)
     }
 
     const handleDateChange = (date) => {
@@ -43,11 +48,6 @@ export default function CreateUser() {
                 <label htmlFor="name">
                     Name
                     <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} />
-                </label>
-
-                <label htmlFor="email">
-                    Email
-                    <input type="text" name="email" id="email" value={formData.email} onChange={handleInputChange} />
                 </label>
 
                 <label htmlFor="position">

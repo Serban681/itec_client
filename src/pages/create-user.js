@@ -41,7 +41,7 @@ export default function createUser() {
                 if(formData.role === 'manager') {
                     router.push('/userlist')
                 } else {
-                    router.push('/create-employee')
+                    router.push(`/create-employee/${data.id}`)
                 }
             }
         })
