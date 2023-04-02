@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import styles from "@/styles/MyProfile.module.css";
 import { useContext } from "react"
 import { UserContext } from "./_app"
 import { useForm } from "../utils/useForm"
@@ -31,9 +31,9 @@ export default function ResetPassword() {
     }
 
     return (
-        <div>
-            <h1>Reset Password</h1>
-            <form onSubmit={handleSubmit}>
+        <div className={styles.container}>
+            <h1 className={styles.edit_header}>Reset Password</h1>
+            <form className={styles.edit_container} onSubmit={handleSubmit}>
                 <label>
                     Old Password
                     <input type="password" name="oldPassword" value={formData.oldPassword} onChange={handleInputChange} />
@@ -44,7 +44,7 @@ export default function ResetPassword() {
                     <input type="password" name="newPassword" value={formData.newPassword} onChange={handleInputChange} />
                 </label>
                 <br />
-                <button type="submit">Reset</button>
+                <button className={styles.button} type="submit">Reset</button>
             </form>
             
         </div>
