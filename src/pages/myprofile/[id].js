@@ -29,9 +29,6 @@ export default function MyProfile({  }) {
     const { roles } = useContext(UserContext)
 
     useEffect(() => {
-        if(user.role === 'manager') {
-            router.push(`/userlist`)
-        }
         // const token = sessionStorage.getItem('token')
         // console.log(token)
 
@@ -63,13 +60,34 @@ export default function MyProfile({  }) {
 
     const handleDateChange = (date) => {
         setStartDate(date)
-        calculateTotalDays(date)
+        calculateTotalDays()
     }
 
     const saveEdit = (e) => {
         e.preventDefault()
         console.log(startDate)
         console.log(formData)
+
+        // fetch(`http://localhost:5140/api/users/id/${id}`)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if(data.role == roles['manager']) {
+        //             router.push(`/userlist`)
+        //         }
+        //         else {
+        //             fetch(`http://localhost:5140/api/${data.role == roles['newemployee'] ? 'newemployees' : 'oldemployees'}/userid/${data.id}`, {
+        //                 method: 'PATCH',
+        //                 headers: {
+        //                     'Content-Type': 'application/json'
+        //                 },
+        //                 body: JSON.stringify({formData, startDate})
+        //             })
+        //                 .then(res => res.json())
+        //                 .then(data => {
+        //                     console.log(data)
+        //                 })
+        //         }  
+        //     })
     }
 
     const handleClick = () => {
@@ -83,22 +101,22 @@ export default function MyProfile({  }) {
                 <label >
                     Name
                     <br />
-                    <input name="name" value={formData.name} type="text" onChange={handleInputChange} />
+                    <input readOnly={user.role === 'oldemployee'} name="name" value={formData.name} type="text" onChange={handleInputChange} />
                 </label>
                 <label>
                     Email
                     <br />
-                    <input name="email" value={formData.email} type="email" onChange={handleInputChange} />
+                    <input readOnly={user.role === 'oldemployee'} name="email" value={formData.email} type="email" onChange={handleInputChange} />
                 </label>
                 <label>
                     Position
                     <br />
-                    <input readOnly={!(user.role === 'manager')} name="position" value={formData.position} type="text" onChange={handleInputChange} />
+                    <input readOnly={user.role !== 'manager'} name="position" value={formData.position} type="text" onChange={handleInputChange} />
                 </label>
                 <label>
                     Start Date
                     <br />
-                    <DatePicker readOnly={!(user.role === 'manager')} selected={startDate} onChange={(date) => handleDateChange(date)} />
+                    <DatePicker readOnly={user.role !== 'manager'} selected={startDate} onChange={(date) => handleDateChange(date)} />
                 </label>
                 <p>Days Worked: {totalDays}</p>
 
@@ -107,7 +125,7 @@ export default function MyProfile({  }) {
                     <br />
                     <textarea className={styles.bio} name="bio" id="bio" value={formData.bio} onChange={handleInputChange}></textarea>
                 </label>
-                {/* {user.id === id &&  <button type="submit" onClick={saveEdit}>Save</button>} */}
+                <button type="submit" onClick={saveEdit}>Save</button>
                 {/* <button disabled={!(user.id == id || user?.role === 'manager')} type="submit" onClick={saveEdit}>Save</button> */}
             </form>
 
