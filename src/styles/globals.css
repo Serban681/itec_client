@@ -23,6 +23,13 @@ body {
     background-color: var(--yellow);
 }
 
+.title{
+    align-items: flex-start;
+    font-family: 'Montserrat', sans-serif;
+    font-size: larger;
+    color: aliceblue;
+}
+
 textarea {
     resize: none;
     border: none;
@@ -56,5 +63,9 @@ label > input {
 
 input:focus {
     outline: none;
+}
+
+.box{
+
 }
 
