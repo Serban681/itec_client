@@ -30,3 +30,13 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+.idea/itec_client.iml
+
+.idea/modules.xml
+
+.idea/vcs.xml
+
+package.json
+
+src/config.env
