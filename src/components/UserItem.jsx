@@ -13,13 +13,12 @@ export default function UserItem({ user }) {
 
     const goToEdit = () => {
         // router.push(`/myprofile/${user.id}`)
-        router.push(`/myprofile/${21312}`)
+        router.push(`/myprofile/${user.userId}`)
     }
 
-    useEffect(() => {
-        // console.log(user)
-    }, [])
-
+    // useEffect(() => {
+    //     console.log(user)
+    // })
     
     // const [toggleEdit, setEdit] = useState(false)
 
@@ -39,7 +38,7 @@ export default function UserItem({ user }) {
 
             <div className={`${!isBioHidden && 'hide'}`}>
                 <div className={` ${styles.bio_container}`}>
-                    Hello I'm Sam. And I code everyday
+                    {user.bio}
                     <br />
                     <button onClick={() => goToEdit()}>Edit</button>
                 </div>

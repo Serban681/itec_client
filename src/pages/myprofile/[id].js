@@ -26,6 +26,8 @@ export default function MyProfile({  }) {
 
     const { totalDays, calculateTotalDays } = useDaysWoked()
 
+    const { roles } = useContext(UserContext)
+
     useEffect(() => {
         // const token = sessionStorage.getItem('token')
         // console.log(token)
@@ -34,10 +36,25 @@ export default function MyProfile({  }) {
         //     router.push(`/userlist`)
         // }
 
+        console.log(roles['newemployee'])
+
+        fetch(`http://localhost:5140/api/users/id/${id}`)
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                fetch(`http://localhost:5140/api/${data.role == roles['newemployee'] ? 'newemployees' : 'oldemployees'}/userid/${data.id}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        // setFormData(data)
+                        // setStartDate(new Date(data.startedWorking))
+                    })
+            })
+
         // fetch(`http://localhost:5140/${user.role === 'new_employee' ? 'newemployees' : 'oldemployess'}/${id}`)
         //     .then(res => res.json())
         //     .then(data => console.log(data))
-            // .then(data => setFormData(data))
+        //     .then(data => setFormData(data))
     }, [])
 
     const handleDateChange = (date) => {
@@ -87,7 +104,7 @@ export default function MyProfile({  }) {
                     <textarea className={styles.bio} name="bio" id="bio" value={formData.bio} onChange={handleInputChange}></textarea>
                 </label>
                 {/* {user.id === id &&  <button type="submit" onClick={saveEdit}>Save</button>} */}
-                <button disabled={!(user.id == id || user?.role === 'manager')} type="submit" onClick={saveEdit}>Save</button>
+                {/* <button disabled={!(user.id == id || user?.role === 'manager')} type="submit" onClick={saveEdit}>Save</button> */}
             </form>
 
             {/* <button onClick={() => handleClick()}>Click me</button> */}
