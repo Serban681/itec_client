@@ -13,6 +13,10 @@
 .login_nav {
     position: absolute;
     top: 0;
+    width: 100%;
+    left: 0;
+    border-radius: 20px 20px 0 0;
+    height: 2rem;
     background-color: var(--red);
 }
 
