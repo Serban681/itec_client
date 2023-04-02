@@ -2,23 +2,22 @@ import { useForm } from "@/utils/useForm"
 import { useRouter } from "next/router"
 import { useContext, useEffect, useState } from "react"
 import { UserContext } from "./_app"
+import { toast } from "react-toastify"
 
 export default function createUser() {
     const {formData, handleInputChange} = useForm({email: '', password: '', role: 'manager'})
 
     const router = useRouter()
 
-    const { roles, setRoles } = useContext(UserContext)
-
-    useEffect(() => {        
-        // .then(data => console.log(data))
-        // .then(data => setRoles(data))
-    }, [])
+    const {roles, setRoles} = useContext(UserContext)
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        // console.log(roles[formData.role])
+        // console.log({
+        //     roleId: roles[formData.role]
+        // })
+        
         fetch('http://localhost:5140/api/users', {
             method: 'POST',
             headers: {
@@ -29,14 +28,23 @@ export default function createUser() {
                 password: formData.password,
                 roleId: roles[formData.role]
             })
+        }) 
+        .then(async res => {
+            const data = await res.json()
+
+            if(res.status === 400) {
+                toast.error(data[0].code)
+            }
+            console.log(res.status)
+            if(res.status === 201) {
+                if(formData.role === 'manager') {
+                    router.push('/userlist')
+                } else {
+                    router.push('/create-employee')
+                }
+            }
         })
-        .then(res => {
-            console.log(res)
-        })
-        .then(data => {
-            
-        })
-        .catch(err => console.log(err))
+        .catch(err => toast.err('Internal Server Error'))
         
         // if(formData.role === 'manager') {
         //     router.push('/userlist')
