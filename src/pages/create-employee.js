@@ -36,10 +36,10 @@ export default function CreateUser() {
     }
 
     return (
-        <div>
-            <h1>Create Employee</h1>
+        <div className={styles.container}>
+            <h1 className={styles.edit_header}>Create Employee</h1>
 
-            <form onSubmit={handleSubmit} className={styles.container}>
+            <form onSubmit={handleSubmit} className={styles.edit_container}>
                 <label htmlFor="name">
                     Name
                     <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} />
@@ -66,7 +66,7 @@ export default function CreateUser() {
                 <label htmlFor="bio">
                     Bio
                     <br />
-                    <textarea name="bio" id="bio" value={formData.bio} onChange={handleInputChange}></textarea>
+                    <textarea className={styles.bio} name="bio" id="bio" value={formData.bio} onChange={handleInputChange}></textarea>
                 </label>
 
                 <button type="submit">Create User</button>
