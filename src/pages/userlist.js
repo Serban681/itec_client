@@ -1,6 +1,6 @@
 import UserItem from "../components/UserItem"
 import { useState } from "react"
-
+import styles from '@/styles/UserList.module.css'
 import { useContext } from "react"
 import { UserContext } from "./_app"
 
@@ -36,17 +36,24 @@ export default function Manager() {
                 // .then(data => console.log(data))
         
         else {
-            fetch('http://localhost:5140/api/newemployees') // is all or just for the buddyyy?
-                .then(res => res.json())
-                .then(data => console.log(data))
-                // .then(data => setUsers([...users, data]))
+          if(user.role === 'oldemployee') {
+              fetch('http://localhost:5140/api/newemployees/buddyid/') // is all or just for the buddyyy?
+                  .then(res => res.json())
+                  .then(data => console.log(data))
+              // .then(data => setUsers([...users, data]))
+          }
         }
     }, [])
 
     return (
-        <div>
-            <h1>Manager</h1>
-
+        <div className={styles.form}>
+            <h1 className={styles.edit_header}>Manager</h1>
+            {/*<div>*/}
+            {/*    <div>Nume</div>*/}
+            {/*    <div>Nume</div>*/}
+            {/*    <div>Nume</div>*/}
+            {/*    <div>Nume</div>*/}
+            {/*</div>*/}
             {/* <UserItem user={{name: 'Ser', email: 'ser@gmail.com', position: 'sw eng'}} /> */}
             {oldEmployees.map((user, i) => <UserItem user={user} key={i} />)}
             {newEmployees.map((user, i) => <UserItem user={user} key={i} />)}

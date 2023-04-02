@@ -10,7 +10,13 @@ export default function Navbar() {
     }
 
     const goToAllUsers = () => {
-        router.push('/manager')
+        router.push('/userlist')
+    }
+    const goToMatches = () => {
+        router.push('/create-user')
+    }
+    const goToQuestions= () => {
+        router.push('/question')
     }
 
     return (
@@ -19,6 +25,8 @@ export default function Navbar() {
             <div>
                 <button onClick={goToAllUsers} className={styles.btn}>All Users</button>
                 <button onClick={goToCreateUser} className={styles.btn}>Add user</button>
+                <button onClick={goToMatches} className={styles.btn}>Matches</button>
+                <button onClick={goToQuestions} className={styles.btn}>Questions</button>
             </div>
         </div>
     )

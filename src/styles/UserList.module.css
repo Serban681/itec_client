@@ -1,0 +1,30 @@
+.edit_header{
+    margin: 0%;
+    width: 100%;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 24px;
+    color: var(--black);
+    margin-left: 20%;
+    padding-top: 2rem;
+    margin-bottom: 2rem;
+}
+.form{
+    padding: 5rem;
+    position: absolute;
+    width: 100%;
+    max-width: 975px;
+    height: auto;
+    left: 58%;
+    transform: translateX(-50%);
+    top: 20%;
+    background: var(--yellow);
+    font-family: 'Montserrat';
+    font-style: normal;
+
+    color: var(--black);
+    border-radius: 20px;
+}
+
