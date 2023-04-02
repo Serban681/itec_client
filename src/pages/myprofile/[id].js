@@ -56,9 +56,8 @@ export default function MyProfile({  }) {
     }
 
     return (
-        <div>
-            <h1>My Profile</h1>
-            
+        <div className={styles.container}>
+            <h1 className={styles.edit_header}>My Profile</h1>  
             <form className={styles.edit_container}>
                 <label >
                     Name
@@ -85,7 +84,7 @@ export default function MyProfile({  }) {
                 <label htmlFor="bio">
                     Bio
                     <br />
-                    <textarea name="bio" id="bio" value={formData.bio} onChange={handleInputChange}></textarea>
+                    <textarea className={styles.bio} name="bio" id="bio" value={formData.bio} onChange={handleInputChange}></textarea>
                 </label>
                 {/* {user.id === id &&  <button type="submit" onClick={saveEdit}>Save</button>} */}
                 <button disabled={!(user.id == id || user?.role === 'manager')} type="submit" onClick={saveEdit}>Save</button>

@@ -13,6 +13,7 @@
 
 body {
     margin: 0;
+    background-color: var(--yellow);
 }
 
 .logo {
@@ -24,6 +25,7 @@ body {
 
 textarea {
     resize: none;
+    border: none;
 }
 
 button {
@@ -45,6 +47,7 @@ input {
     width: 100%;
     border: none;
     color: var(--black);
+    margin-bottom: 1rem;
 }
 
 label > input {
