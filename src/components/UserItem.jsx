@@ -3,11 +3,16 @@ import { useEffect, useState } from "react"
 
 import { useRouter } from "next/router"
 
+import { useDaysWoked } from "@/utils/useDaysWorked"
+
 export default function UserItem({ user }) {
     const [isBioHidden, hideBio] = useState(false)
     const router = useRouter()
 
+    const { totalDays, calculateTotalDays } = useDaysWoked()
+
     const toggleBio = () => {
+        console.log(user)
         hideBio(!isBioHidden)
     }
 
@@ -16,9 +21,9 @@ export default function UserItem({ user }) {
         router.push(`/myprofile/${user.userId}`)
     }
 
-    // useEffect(() => {
-    //     console.log(user)
-    // })
+    useEffect(() => {
+        calculateTotalDays(user.startedWorking)
+    })
     
     // const [toggleEdit, setEdit] = useState(false)
 
@@ -29,7 +34,7 @@ export default function UserItem({ user }) {
                 <div>{user.name}</div>
                 <div>{user.position}</div>
                 <div>{user.email}</div>
-                <div>Date</div>
+                <div>{totalDays} days</div>
                 {/* <div>{user.date}</div> */}
                 <button onClick={() => toggleBio()}>Bio</button>
 

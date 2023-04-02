@@ -14,21 +14,24 @@ export default function Middleware() {
         
         const decoded = jwt_decode(token)
 
-        const { jti, iat, role, id } = decoded
+        // console.log(decoded)
+
+        const { jti, iat, role, id, changedpassword } = decoded
 
         setUser({ role, iat, jti, userId: id })
 
-        console.log(user)
-
-        // if(token !== '') {
-        //     if (role === 'manager' || role === 'old_employee') {
-        //         router.push('/userlist')
-        //     } else {
-        //         // router.push(`/myprofile/${user.id}`)
-        //     }
-        // } else {
-        //     router.push('/')
-        // }
+        if(token !== '') {
+            // console.log(false)
+            if(changedpassword === "False") {
+                router.push('/resetpassword')    
+            } else if (role === 'manager' || role === 'oldemployee') {
+                router.push('/userlist')
+            } else {
+                router.push(`/myprofile/${user.userId}`)
+            }
+        } else {
+            router.push('/')
+        }
     }, [])
 
     return (
