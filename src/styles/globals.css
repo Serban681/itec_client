@@ -24,7 +24,7 @@ body {
 }
 
 .title{
-    align-items: flex-start;
+    display: inline-table;
     font-family: 'Montserrat', sans-serif;
     font-size: larger;
     color: aliceblue;
