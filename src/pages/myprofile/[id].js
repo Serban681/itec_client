@@ -29,6 +29,9 @@ export default function MyProfile({  }) {
     const { roles } = useContext(UserContext)
 
     useEffect(() => {
+        if(user.role === 'manager') {
+            router.push(`/userlist`)
+        }
         // const token = sessionStorage.getItem('token')
         // console.log(token)
 
