@@ -36,12 +36,15 @@ export default function Manager() {
                 // .then(data => console.log(data))
         
         else {
-          if(user.role === 'oldemployee') {
-              fetch(`http://localhost:5140/api/newemployees/buddyid/${user.id}`) // is all or just for the buddyyy?
-                  .then(res => res.json())
-                  .then(data => console.log(data))
-              // .then(data => setUsers([...users, data]))
-          }
+          // if(user.role === 'oldemployee') {
+          //     fetch(`http://localhost:5140/api/newemployees/buddyid/${user.id}`) // is all or just for the buddyyy?
+          //         .then(res => res.json())
+          //         .then(data => console.log(data))
+          //     // .then(data => setUsers([...users, data]))
+          // }
+          // else{
+          //     router.push(`/myprofile/${user.id}`)
+          // }
         }
     }, [])
 
