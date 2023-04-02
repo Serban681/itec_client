@@ -17,7 +17,7 @@ import { useDaysWoked } from "../../utils/useDaysWorked";
 export default function MyProfile({  }) {
     const [startDate, setStartDate] = useState(new Date())
 
-    const {formData, handleInputChange} = useForm({name: '', email: '', position: ''})
+    const {formData, handleInputChange, setFormData} = useForm({name: '', email: '', position: ''})
     
     const { user } = useContext(UserContext)
 
@@ -36,17 +36,13 @@ export default function MyProfile({  }) {
         //     router.push(`/userlist`)
         // }
 
-        console.log(roles['newemployee'])
-
         fetch(`http://localhost:5140/api/users/id/${id}`)
             .then(res => res.json())
             .then(data => {
-                // console.log(data)
                 fetch(`http://localhost:5140/api/${data.role == roles['newemployee'] ? 'newemployees' : 'oldemployees'}/userid/${data.id}`)
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data)
-                        // setFormData(data)
+                        setFormData(data)
                         // setStartDate(new Date(data.startedWorking))
                     })
             })

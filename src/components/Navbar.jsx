@@ -19,6 +19,10 @@ export default function Navbar() {
         router.push('/question')
     }
 
+    const goToMyProfile = () => {
+        router.push('/myprofile')
+    }
+
     return (
         <div className={styles.container}>
             <div className="logo"></div>
@@ -31,3 +35,10 @@ export default function Navbar() {
         </div>
     )
 }
+
+/*
+    useEffect(() => {
+        router.push('/manager')
+    }, [])
+
+*/
