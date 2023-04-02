@@ -1,5 +1,5 @@
 import styles from "@/styles/UserItem.module.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { useRouter } from "next/router"
 
@@ -15,6 +15,10 @@ export default function UserItem({ user }) {
         // router.push(`/myprofile/${user.id}`)
         router.push(`/myprofile/${21312}`)
     }
+
+    useEffect(() => {
+        // console.log(user)
+    }, [])
 
     
     // const [toggleEdit, setEdit] = useState(false)
