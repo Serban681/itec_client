@@ -43,21 +43,25 @@ export default function createQuestion() {
             </label>
             <label className={styles.label}>
                 Is required
-                <input type="checkbox" name="isrequired" value={formData.isrequired} onChange={handleInputChange}/>
+                <div>
+                    <input size={15} type="checkbox" name="isrequired" value={formData.isrequired} onChange={handleInputChange}/>
+                </div>
             </label>
             <br/>
             <label className={styles.label}  htmlFor="questions">
                 Question Type:
-                <select name="type" id="type" value={formData.type} onChange={handleInputChange}>
+                <br/>
+                <select className={styles.label} name="type" id="type" value={formData.type} onChange={handleInputChange}>
                     <option type="number" value={0}>Text</option>
                     <option type="number" value={1}>Dropdown</option>
                     <option type="number" value={2}>Radio Buttons</option>
                 </select>
             </label>
-            <br/>
+            <br/><br/>
             <label className={styles.label}  htmlFor="formtype">
                 Role:
-                <select type="number" name="formtype" id="formtype" value={formData.formtype} onChange={handleInputChange}>
+                <br/>
+                <select className={styles.label} type="number" name="formtype" id="formtype" value={formData.formtype} onChange={handleInputChange}>
                     <option type="number" value={0}>Frontend</option>
                     <option type="number" value={1}>Backend</option>
                     <option type="number" value={2}>Soft skills</option>
