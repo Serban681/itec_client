@@ -28,7 +28,7 @@ export default function createUser() {
                 password: formData.password,
                 roleId: roles[formData.role]
             })
-        }) 
+        })
         .then(async res => {
             const data = await res.json()
 
