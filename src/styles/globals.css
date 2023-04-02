@@ -13,6 +13,7 @@
 
 body {
     margin: 0;
+    background-color: var(--yellow);
 }
 
 .logo {
@@ -28,10 +29,6 @@ textarea {
 
 button {
     cursor: pointer;
-<<<<<<< HEAD
-    /* background-color: ; */
-}
-=======
     padding: 0.7rem 2rem;
     font-family: 'Montserrat', sans-serif;
     background-color: var(--black);
@@ -49,6 +46,7 @@ input {
     width: 100%;
     border: none;
     color: var(--black);
+    margin-bottom: 1rem;
 }
 
 label > input {
@@ -59,4 +57,3 @@ input:focus {
     outline: none;
 }
 
->>>>>>> main
