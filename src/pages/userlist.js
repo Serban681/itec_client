@@ -37,7 +37,7 @@ export default function Manager() {
         
         else {
           if(user.role === 'oldemployee') {
-              fetch('http://localhost:5140/api/newemployees/buddyid/') // is all or just for the buddyyy?
+              fetch(`http://localhost:5140/api/newemployees/buddyid/${user.id}`) // is all or just for the buddyyy?
                   .then(res => res.json())
                   .then(data => console.log(data))
               // .then(data => setUsers([...users, data]))
