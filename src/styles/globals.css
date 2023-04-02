@@ -13,7 +13,7 @@
 
 body {
     margin: 0;
-    background-color: gray;
+    background-color: var(--yellow);
 }
 
 .logo {
@@ -46,6 +46,7 @@ input {
     width: 100%;
     border: none;
     color: var(--black);
+    margin-bottom: 1rem;
 }
 
 label > input {
