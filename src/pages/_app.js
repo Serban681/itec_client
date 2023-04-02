@@ -10,7 +10,7 @@ export const UserContext = createContext()
 
 export default function App({ Component, pageProps }) {
   const [user, setUser] = useState({
-    role: '',
+    role: 'manager',
     iat: '',
     jti: ''
   })
