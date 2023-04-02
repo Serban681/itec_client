@@ -1,33 +1,38 @@
-import styles from '../styles/CreateUser.module.css'
+import styles from '../../styles/CreateUser.module.css'
 import { useForm } from '@/utils/useForm'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { useState } from 'react'
 
 import { useDaysWoked } from '@/utils/useDaysWorked'
+import Router, {useRouter} from 'next/router'
 
 export default function CreateUser() {
-    const {formData, handleInputChange } = useForm({name: '', 'email': '', 'bio': '', 'position': ''})
+    const {formData, handleInputChange } = useForm({name: '', 'bio': '', 'position': ''})
 
     const [startDate, setStartDate] = useState(new Date())
 
     const { totalDays, calculateTotalDays } = useDaysWoked()
 
+    const { id } = Router.query
+
+    const router = useRouter()
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        fetch(`http://localhost:5000/api/${totalDays > 365 ? 'oldemployees' : 'newemployees'}`, {
+        fetch(`http://localhost:5140/api/${totalDays > 365 ? 'oldemployees' : 'newemployees'}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify({...formData, userId: id, startedWorking: startDate})
         }).then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => router.push(`/userlist`))	
 
 
-        console.log(formData)
-        console.log(startDate)
+        // console.log(formData)
+        // console.log(startDate)
     }
 
     const handleDateChange = (date) => {
@@ -36,18 +41,13 @@ export default function CreateUser() {
     }
 
     return (
-        <div>
-            <h1>Create Employee</h1>
+        <div className={styles.container}>
+            <h1 className={styles.edit_header}>Create Employee</h1>
 
-            <form onSubmit={handleSubmit} className={styles.container}>
+            <form onSubmit={handleSubmit} className={styles.edit_container}>
                 <label htmlFor="name">
                     Name
                     <input type="text" name="name" id="name" value={formData.name} onChange={handleInputChange} />
-                </label>
-
-                <label htmlFor="email">
-                    Email
-                    <input type="text" name="email" id="email" value={formData.email} onChange={handleInputChange} />
                 </label>
 
                 <label htmlFor="position">
@@ -66,7 +66,7 @@ export default function CreateUser() {
                 <label htmlFor="bio">
                     Bio
                     <br />
-                    <textarea name="bio" id="bio" value={formData.bio} onChange={handleInputChange}></textarea>
+                    <textarea className={styles.bio} name="bio" id="bio" value={formData.bio} onChange={handleInputChange}></textarea>
                 </label>
 
                 <button type="submit">Create User</button>
