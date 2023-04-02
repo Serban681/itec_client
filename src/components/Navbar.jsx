@@ -2,7 +2,12 @@ import styles from '@/styles/Navbar.module.css'
 
 import { useRouter } from 'next/router'
 
+import { UserContext } from '@/pages/_app'
+import { useContext } from 'react'
+
 export default function Navbar() {
+    const { user } = useContext(UserContext)
+
     const router = useRouter()
 
     const goToCreateUser = () => {
@@ -19,9 +24,9 @@ export default function Navbar() {
         router.push('/question')
     }
 
-    // const goToMyProfile = () => {
-    //     router.push(`/myprofile/${user.userId}`)
-    // }
+    const goToMyProfile = () => {
+        router.push(`/myprofile/${user.userId}`)
+    }
 
     return (
         <div className={styles.container}>
@@ -29,16 +34,9 @@ export default function Navbar() {
             <div>
                 <button onClick={goToAllUsers} className={styles.btn}>All Users</button>
                 <button onClick={goToCreateUser} className={styles.btn}>Add user</button>
-                <button onClick={goToMatches} className={styles.btn}>Matches</button>
+                <button onClick={goToMyProfile} className={styles.btn}>My Profile</button>
                 <button onClick={goToQuestions} className={styles.btn}>Questions</button>
             </div>
         </div>
     )
 }
-
-/*
-    useEffect(() => {
-        router.push('/manager')
-    }, [])
-
-*/

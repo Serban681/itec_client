@@ -39,12 +39,17 @@ export default function MyProfile({  }) {
         fetch(`http://localhost:5140/api/users/id/${id}`)
             .then(res => res.json())
             .then(data => {
-                fetch(`http://localhost:5140/api/${data.role == roles['newemployee'] ? 'newemployees' : 'oldemployees'}/userid/${data.id}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        setFormData(data)
-                        // setStartDate(new Date(data.startedWorking))
-                    })
+                if(data.role == roles['manager']) {
+                    router.push(`/userlist`)
+                }
+                else {
+                    fetch(`http://localhost:5140/api/${data.role == roles['newemployee'] ? 'newemployees' : 'oldemployees'}/userid/${data.id}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            setFormData(data)
+                            // setStartDate(new Date(data.startedWorking))
+                        })
+                }  
             })
 
         // fetch(`http://localhost:5140/${user.role === 'new_employee' ? 'newemployees' : 'oldemployess'}/${id}`)
