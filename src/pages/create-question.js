@@ -29,11 +29,10 @@ export default function createQuestion() {
             .then(async res => {
                 const data = await res.json()
                 if(res.status === 400){
-                    toast.error(data[0].code)
+                    toast.error(data[0]?.code)
                 }
                 console.log(res.status)
             } )
-            .catch(err => toast.err('Internal Server Error'))
     }
 
     return(
