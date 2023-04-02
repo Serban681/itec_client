@@ -31,6 +31,7 @@ export default function Navbar() {
     return (
         <div className={styles.container}>
             <div className="logo"></div>
+            <div className="title">My localhost 3000</div>
             <div>
                 {user.role === 'manager' && <button onClick={goToAllUsers} className={styles.btn}>All Users</button>}
                 {user.role === 'manager' && <button onClick={goToCreateUser} className={styles.btn}>Add user</button>}
