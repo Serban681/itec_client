@@ -19,9 +19,9 @@ export default function Navbar() {
         router.push('/question')
     }
 
-    const goToMyProfile = () => {
-        router.push('/myprofile')
-    }
+    // const goToMyProfile = () => {
+    //     router.push(`/myprofile/${user.userId}`)
+    // }
 
     return (
         <div className={styles.container}>
